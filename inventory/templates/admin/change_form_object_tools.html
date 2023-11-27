@@ -1,0 +1,11 @@
+{% extends "admin/change_form_object_tools.html" %}
+{% load i18n admin_urls %}
+{% block object-tools-items %}
+<li>
+    {% url opts|admin_urlname:'manage_inventory_history' original.pk|admin_urlquote as history_url %}
+    {% if history_url %}
+    <a href="{% add_preserved_filters history_url %}" class="historylink">{% translate "재고 관리 이력" %}</a>
+    {% endif %}
+</li>
+{% if has_absolute_url %}<li><a href="{{ absolute_url }}" class="viewsitelink">{% translate "View on site" %}</a></li>{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "admin/object_history.html" %}
+{% load i18n %}
+{% block content %}
+<div id="content-main">
+<div class="module">
+
+{% if action_list %}
+    <table id="change-history">
+        <thead>
+        <tr>
+            <th scope="col">{% translate '날짜' %}</th>
+            <th scope="col">{% translate '구분' %}</th>
+            <th scope="col">{% translate '품목명' %}</th>
+            <th scope="col">{% translate '수량' %}</th>
+            <th scope="col">{% translate '단가' %}</th>
+            <th scope="col">{% translate '메모' %}</th>
+            <th scope="col">{% translate '작업한 사람' %}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for action in action_list %}
+        <tr>
+            <th scope="row">{{ action.created_at|date:"Y-m-d" }}</th>
+            <th scope="row">{{ action.get_classification_display }}</th>
+            <th scope="row">{{ action.name }}</th>
+            <th scope="row">{{ action.quantity }}</th>
+            <th scope="row">{{ action.unit_price }}</th>
+            <th scope="row">{{ action.memo }}</th>
+            <th scope="row">{{ action.staff }}</th>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>{% translate 'This object doesn’t have a change history. It probably wasn’t added via this admin site.' %}</p>
+{% endif %}
+</div>
+</div>
+{% endblock %}
